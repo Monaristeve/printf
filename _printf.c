@@ -1,55 +1,59 @@
 #include "main.h"
-#include <stdarg.h>
-#include <unistd.h>
+void print_buffer(char buffer[], int *buff_ind);
 /**
- * _printf - function that produces output
- * @format: character string
- *
- * Return: number of characters printed
+ * _printf - this is a function that prints to standard output
+ * @format: format by which function produces output
+ * Return: the number of characters printed excluding the
+ *  null byte used to end output to strings
  */
 int _printf(const char *format, ...)
 {
-	int result = 0;
-	char c;
-	size_t len;
-	const char *str;
-	va_list args;
-	va_start(args, format);
+	int x, y = 0, z = 0;/*y=output to be printed while z=printed chars*/
+	int width, flags, precision, size, buff_ind = 0;
+	va_list list;
+	char buffer[BUFF_SIZE];
 
 	if (format == NULL)
-		return -1;
-
-	while (*format != '\0')
+		return (-1);
+	va_start(list, format);
+	for (x = 0; format && format[x] != '\0'; x++)
 	{
-		if (*format != '%')
+		if (format[x] != '%')
 		{
-			write(1, format, 1);
-			format++;
+			buffer[buff_ind++] = format[x];
+			if (buff_ind == BUFF_SIZE)
+				print_buffer(buffer, &buff_ind);
+			/* write(1, &format[x], 1);*/
+			z++;
 		}
-		switch (*format)
+		else
 		{
-			case 'c':
-				c = va_arg(args, int);
-				result += write(1, &c, 1);
-				break;
-			case 's':
-				str = va_arg(args, const char *);
-				if (str == NULL)
-					return -1;
-				else
-				{
-					len = strlen(str);
-					result += write(1, str, len);
-				}
-				break;
-			case '%':
-				result += write(1, "%", 1);
-				break;
-			default:
-				break;
+			print_buffer(buffer, &buff_ind);
+			width = get_width(format, &x, list);
+			flags = get_flags(format, &x);
+			precision = get_precision(format, &x, list);
+			size = get_size(format, &x);
+			++x;
+			y = handle_print(format, &x, list, buffer,
+					width, flags, precision, size);
+			if (y == -1)
+				return (-1);
+			z += y;
 		}
-		format++;
 	}
-	va_end(args);
-	return (result);
+	print_buffer(buffer, &buff_ind);
+	va_end(list);
+	return (z);
 }
+/**
+ * print_buffer - a function that prints the content of the buffer
+ * @buffer: character array
+ * @buff_ind: this is the index at which the next character is added
+ */
+void print_buffer(char buffer[], int *buff_ind)
+{
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
+	*buff_ind = 0;
+}
+
