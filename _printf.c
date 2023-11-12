@@ -11,6 +11,8 @@ int _printf(const char *format, ...)
 {
 	int result = 0;
 	char c;
+	size_t len;
+	const char *str;
 	va_list args;
 	va_start(args, format);
 
@@ -27,18 +29,20 @@ int _printf(const char *format, ...)
 				result += write(1, &c, 1);
 				break;
 			case 's':
-				result += write(1, va_arg(args, char *), strlen(va_arg(args, char *)));
+				str = va_arg(args, const char *);
+				if (str == NULL)
+					return -1;
+				else
+				{
+					len = strlen(str);
+					result += write(1, str, len);
+				}
 				break;
 			case '%':
 				result += write(1, "%", 1);
 				break;
 			default:
 				break;
-		}
-		else
-		{
-			write(1, format, 1);
-			result++;
 		}
 		format++;
 	}
