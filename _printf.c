@@ -35,6 +35,11 @@ int _printf(const char *format, ...)
 			default:
 				break;
 		}
+		else
+		{
+			write(1, format, 1);
+			result++;
+		}
 		format++;
 	}
 	va_end(args);
