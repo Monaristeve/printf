@@ -16,10 +16,14 @@ int _printf(const char *format, ...)
 	va_list args;
 	va_start(args, format);
 
+	if (format == NULL)
+		return -1;
+
 	while (*format != '\0')
 	{
-		if (*format == '%')
+		if (*format != '%')
 		{
+			write(1, format, 1);
 			format++;
 		}
 		switch (*format)
