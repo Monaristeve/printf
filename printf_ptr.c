@@ -25,6 +25,6 @@ int printf_ptr(va_list val)
 	l = (unsigned long int)m;
 	_putchar('0');
 	_putchar('x');
-	d = printf_hex_aux(l);
+	d = printf_hex_auxilliary(l);
 	return (d + 2);
 }

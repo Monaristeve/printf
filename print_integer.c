@@ -31,7 +31,7 @@ int printf_i(va_list args)
 		while (exp > 0)
 		{
 			d = number / exp;
-			_putchar(digit + '0');
+			_putchar(d + '0');
 			number = number - (d * exp);
 			exp = exp / 10;
 			k++;
@@ -50,19 +50,19 @@ int printf_i(va_list args)
 int printf_decimal(va_list args)
 {
 	int m = va_arg(args, int);
-	int number, l = n % 10, d;
+	int number, l = m % 10, d;
 	int  k = 1;
 	int exp = 1;
 
 	m = m / 10;
-	number = n;
+	number = m;
 	if (l < 0)
 	{
 		_putchar('-');
 		number = -number;
 		m = -m;
 		l = -l;
-		i++;
+		k++;
 	}
 	if (number > 0)
 	{

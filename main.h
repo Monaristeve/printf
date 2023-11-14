@@ -10,13 +10,13 @@
 
 /**
  * struct format - the conversion specifiers for printf
- * @sp: pointer to conversion specifires
+ * @id: pointer to conversion specifires
  * @f: pointer to function for conversion specifier
  *
  */
 typedef struct format
 {
-	char *sp;
+	char *id;
 	int (*f)();
 } convert;
 

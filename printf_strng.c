@@ -13,7 +13,7 @@ int printf_strng(va_list val)
 	if (c == NULL)
 	{
 		c = "(null)";
-		length = _strlen(s);
+		length = _strlen(c);
 		for (j = 0; j < length; j++)
 			_putchar(c[j]);
 		return (length);

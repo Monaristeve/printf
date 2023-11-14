@@ -11,7 +11,7 @@ int printf_ex_strng(va_list args)
 	int j, length = 0;
 	int cast;
 
-	str = va_arg(str, char *);
+	str = va_arg(args, char *);
 
 	if (str == NULL)
 		str = "(null)";
