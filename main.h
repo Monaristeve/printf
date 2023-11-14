@@ -18,7 +18,11 @@ typedef struct format
 {
 	char *sp;
 	int (*f)();
+<<<<<<< HEAD
 }convert;
+=======
+} covert;
+>>>>>>> 80968e96f015ba89248e88d1535672324c844074
 int printf_HEXU(va_list args);
 int printf_character(va_list val);
 int printf_i(va_list args);
