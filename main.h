@@ -44,6 +44,6 @@ int printf_hex_auxilliary(unsigned long int num);
 int printf_ptr(va_list val);
 int printf_rot(va_list args);
 int printf_strng(va_list val);
-
+int *_strcpy(char *dest, char *src);
 
 #endif
