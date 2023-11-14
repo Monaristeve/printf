@@ -18,12 +18,12 @@ typedef struct format
 {
 	char *sp;
 	int (*f)();
-}covert;
+} covert;
 int printf_HEXU(va_list args);
 int printf_character(va_list val);
 int printf_i(va_list args);
 int printf_decimal(va_list args);
-int printf_oct(va_list args);
+int printf_octal(va_list args);
 int printf_rev(va_list args);
 int _strlen(char *str);
 int _strlenc(const char *str);
